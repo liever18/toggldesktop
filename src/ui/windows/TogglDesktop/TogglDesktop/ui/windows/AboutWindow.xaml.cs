@@ -4,21 +4,26 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TogglDesktop.ViewModels;
 
 namespace TogglDesktop
 {
     public partial class AboutWindow
     {
-        public string[] Channels { get; } = new[] {"Stable", "Beta", "Dev"};
+        public AboutWindowViewModel ViewModel
+        {
+            get => (AboutWindowViewModel)DataContext;
+            private set => DataContext = value;
+        }
 
         public AboutWindow()
         {
             this.InitializeComponent();
 
+            ViewModel = new AboutWindowViewModel($"Version {Program.Version()} {Utils.Bitness()}");
+
             this.updateText.Text = "";
             this.restartButton.Visibility = Visibility.Collapsed;
-
-            this.versionText.Text = $"Version {Program.Version()} {Utils.Bitness()}";
 
             var isUpdatCheckDisabled = Toggl.IsUpdateCheckDisabled();
             this.releaseChannelComboBox.ShowOnlyIf(!isUpdatCheckDisabled, true);
@@ -68,7 +73,7 @@ namespace TogglDesktop
         public void UpdateReleaseChannel()
         {
             var channel = Toggl.UpdateChannel();
-            this.releaseChannelComboBox.SelectedItem = Channels.First(x => x.Equals(channel, StringComparison.OrdinalIgnoreCase));
+            this.releaseChannelComboBox.SelectedItem = ViewModel.Channels.First(x => x.Equals(channel, StringComparison.OrdinalIgnoreCase));
         }
 
         private void onGithubLinkClick(object sender, RoutedEventArgs e)

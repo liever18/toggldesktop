@@ -298,6 +298,7 @@
     </Compile>
     <Compile Include="ui\Tutorial\TutorialManager.cs" />
     <Compile Include="ui\Tutorial\TutorialScreen.cs" />
+    <Compile Include="ui\ViewModels\AboutWindowViewModel.cs" />
     <Compile Include="ui\ViewModels\FeedbackWindowViewModel.cs" />
     <Compile Include="ui\ViewModels\LoginViewModel.cs" />
     <Compile Include="ui\ViewModels\PreferencesWindowViewModel.cs" />

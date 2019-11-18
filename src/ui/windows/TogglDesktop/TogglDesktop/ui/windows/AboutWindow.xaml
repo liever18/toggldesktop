@@ -6,12 +6,13 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:behaviors="clr-namespace:TogglDesktop.Behaviors"
+        xmlns:viewModels="clr-namespace:TogglDesktop.ViewModels"
         mc:Ignorable="d" 
         Height="460" Width="300"
         Title="About"
         Background="{DynamicResource Toggl.CardBackground}"
         WindowStartupLocation="CenterOwner"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        d:DataContext="{d:DesignInstance viewModels:AboutWindowViewModel, IsDesignTimeCreatable=False}">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -39,9 +40,8 @@
             <TextBlock Text="Toggl Desktop" HorizontalAlignment="Center"
                        Style="{StaticResource Toggl.TitleText}"
                        Margin="0 0 0 10"/>
-            <TextBlock Name="versionText" x:FieldModifier="private"
-                       Style="{StaticResource Toggl.CaptionText}"
-                       Text="Version 1.33.7" HorizontalAlignment="Center"
+            <TextBlock Style="{StaticResource Toggl.CaptionText}"
+                       Text="{Binding VersionString}" HorizontalAlignment="Center"
                        Margin="0 0 0 16"/>
             
             <TextBlock Name="updateText" x:FieldModifier="private"
