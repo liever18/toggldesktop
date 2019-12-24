@@ -1494,5 +1494,11 @@ bool_t toggl_set_time_entry(
     const uint64_t project_id,
     const char_t *project_guid,
     const char_t *tags) {
-    return false;
+    if (app(context)->SetTimeEntryProject(to_string(guid), task_id, project_id, to_string(project_guid), false) != toggl::noError) {
+        return false;
+    }
+    if (app(context)->SetTimeEntryTags(to_string(guid), to_string(tags), false) != toggl::noError) {
+        return false;
+    }
+    return toggl::noError == app(context)->SetTimeEntryDescription(to_string(guid), to_string(description));
 }
