@@ -533,7 +533,7 @@ class TOGGL_INTERNAL_EXPORT Context : public TimelineDatasource {
 
     void sync(const bool full_sync);
 
-    error save(const bool push_changes = true);
+    error save(const bool push_changes = true, const bool update_ui = true);
 
     void fetchUpdates();
 
