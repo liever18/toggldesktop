@@ -78,6 +78,7 @@ namespace TogglDesktop
 
             this.finalInitialisation();
             this.trackingWindowSize();
+            this.subscribeToColorSchemeUpdate();
 #if DEBUG
             this.darkModeBorder.Visibility = Visibility.Visible;
 #endif
@@ -319,6 +320,11 @@ namespace TogglDesktop
                 return;
             }
             Toggl.TrackWindowSize(new System.Windows.Size(currentWindow.Width, currentWindow.Height));
+        }
+
+        private void subscribeToColorSchemeUpdate()
+        {
+            Theme.CurrentColorScheme.Subscribe(x => this.updateTitleBarBackground(activeView));
         }
 
         #endregion
@@ -944,6 +950,10 @@ namespace TogglDesktop
 
         private void updateTitleBarBackground(IMainView activeView)
         {
+            if (activeView == null)
+            {
+                return;
+            }
             this.WindowTitleBrush = activeView.TitleBarBrush;
             this.NonActiveWindowTitleBrush = activeView.TitleBarBrush;
         }
