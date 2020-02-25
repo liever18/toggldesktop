@@ -167,8 +167,6 @@ class TOGGL_INTERNAL_EXPORT User : public BaseModel {
     }
     void SetCollapseEntries(const bool value);
 
-    RelatedData related;
-
     // Override BaseModel
     std::string String() const override;
     std::string ModelName() const override;
@@ -226,8 +224,8 @@ class TOGGL_INTERNAL_EXPORT User : public BaseModel {
         }
 
         // Try to set first WID available
-        auto it = related.Workspaces.cbegin();
-        if (it != related.Workspaces.cend()) {
+        auto it = GetRelatedData()->Workspaces.cbegin();
+        if (it != GetRelatedData()->Workspaces.cend()) {
             locked<const Workspace> ws = *it;
             model->SetWID(ws->ID());
         }
